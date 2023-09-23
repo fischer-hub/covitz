@@ -1,0 +1,3 @@
+[submodule "lib/covsonar"]
+	path = lib/covsonar
+	url = https://github.com/rki-mf1/covsonar.git
