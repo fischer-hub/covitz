@@ -1,15 +1,20 @@
-input_seqs = Channel.fromPath( params.input, checkIfExists: true )
-database = Channel.fromPath( params.database, checkIfExists: true )
-sonar_py = Channel.fromPath( {params.sonar_py ? params.sonar_py : "$projectDir/lib/covsonar/sonar.py"}, checkIfExists: true )
+nextflow.enable.dsl = 2
 
 include { covsonar }                 from './modules/covsonar.nf'
 include { count_ambigous }           from './modules/count_ambigous.nf'
 include { count_mutations }          from './modules/count_mutations.nf'
 include { breakfast }                from './modules/breakfast.nf'
+include { cluster }                  from './modules/cluster.nf'
+include { msa }                      from './modules/mafft.nf'
 
 workflow {
-  covsonar(input_seqs, sonar_py, database)
+
+  input_seqs = Channel.fromPath( params.input, checkIfExists: true )
+
+  covsonar(input_seqs)
   count_ambigous(input_seqs)
-  count_mutations(covsonar.out)
-  breakfast(covsonar.out)
+  count_mutations(covsonar.out.mutations)
+  breakfast(covsonar.out.mutations)
+  cluster(input_seqs)
+  msa(input_seqs)
 }

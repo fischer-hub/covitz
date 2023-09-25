@@ -9,13 +9,17 @@ process breakfast {
   output:
     path 'clusters.tsv'
 
+  when:
+    params.cluster.contains('breakfast')
+
   script:
     """
       breakfast \
         --input-file $mutation_tsv \
-        --max-dist 1 \
-        --min-cluster-size 5 \
-        --outdir results/
+        --max-dist 2 \
+        --min-cluster-size 2 \
+        --outdir results/ \
+        --jobs $task.cpus
       
       cp results/clusters.tsv .
     """

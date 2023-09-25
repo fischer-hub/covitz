@@ -1,22 +1,22 @@
 process covsonar {
 
   publishDir "$params.outdir/01-MUTATIONS", pattern: 'mutations.tsv', mode: 'copy'
+  publishDir "$params.outdir/01-MUTATIONS", pattern: '$params.database', mode: 'copy'
   label 'covsonar'
 
   input:
     path seqs
-    path sonar_py
-    path database
 
   output:
-    path 'mutations.tsv'
+    path 'mutations.tsv'   , emit: mutations
+    path "$params.database", emit: database
 
   script:
     """
       # add sequences to covsonar database
-      $sonar_py add --noprogress --db $database -f $seqs -t $task.cpus
+      $params.sonar_py add --db $params.database -f $seqs --cpus $task.cpus --force --cache .
 
       # get mutation information
-      $sonar_py match --tsv --db $database > mutations.tsv
+      $params.sonar_py match --tsv --db $params.database > mutations.tsv
     """
 }

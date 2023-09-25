@@ -1,6 +1,6 @@
 process cluster {
 
-  publishDir "$params.outdir/03-CLUSTERING/cluster", pattern: 'clusters.tsv', mode: 'copy'
+  publishDir "$params.outdir/03-CLUSTERING/cluster", pattern: 'pca_plot.png', mode: 'copy'
   label 'cluster'
 
   input:
@@ -8,6 +8,9 @@ process cluster {
 
   output:
     path 'pca_plot.png'
+
+  when:
+    params.cluster.contains('kmeans')
 
   script:
     """

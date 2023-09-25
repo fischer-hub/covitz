@@ -3,8 +3,9 @@ library(Biostrings)
 library(ggplot2)
 
 args <- commandArgs(trailingOnly = TRUE)
+print(args[1])
 
-sequences <- readDNAStringSet(args[0])
+sequences <- readDNAStringSet(args[1])
 dm <- stringDist(sequences)
 
 write.table(dm, file = "distance_matrix.csv", sep = ",")
