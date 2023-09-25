@@ -4,7 +4,7 @@ process breakfast {
   label 'breakfast'
 
   input:
-    mutation_tsv
+    path mutation_tsv
 
   output:
     path 'clusters.tsv'

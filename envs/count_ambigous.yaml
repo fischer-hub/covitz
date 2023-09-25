@@ -1,0 +1,7 @@
+name: count_ambigous
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - biopython

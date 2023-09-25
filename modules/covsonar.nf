@@ -4,7 +4,9 @@ process covsonar {
   label 'covsonar'
 
   input:
-    seqs
+    path seqs
+    path sonar_py
+    path database
 
   output:
     path 'mutations.tsv'
@@ -12,9 +14,9 @@ process covsonar {
   script:
     """
       # add sequences to covsonar database
-      $sonar_py add --noprogress --db $params.database -f $seqs -t $task.cpus
+      $sonar_py add --noprogress --db $database -f $seqs -t $task.cpus
 
       # get mutation information
-      $sonar_py match --tsv --db $params.database > mutations.tsv
+      $sonar_py match --tsv --db $database > mutations.tsv
     """
 }

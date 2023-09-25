@@ -4,7 +4,7 @@ process count_ambigous {
   label 'count_ambigous'
 
   input:
-    seqs
+    path seqs
 
   output:
     path 'ambig_base_count.csv'

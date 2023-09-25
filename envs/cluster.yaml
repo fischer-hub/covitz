@@ -1,0 +1,8 @@
+name: cluster
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-ggplot2
+  - bioconductor-biostrings

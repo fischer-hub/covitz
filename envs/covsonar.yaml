@@ -1,3 +1,4 @@
+name: covosnar
 channels:
   - conda-forge
   - bioconda

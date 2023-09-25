@@ -1,0 +1,7 @@
+name: breakfast
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - breakfast
