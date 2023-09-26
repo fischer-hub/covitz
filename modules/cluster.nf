@@ -9,11 +9,8 @@ process cluster {
   output:
     path 'pca_plot.png'
 
-  when:
-    params.cluster.contains('kmeans')
-
   script:
     """
-    cluster.R $seqs
+    cluster.py $seqs
     """
 }

@@ -9,8 +9,8 @@ process breakfast {
   output:
     path 'clusters.tsv'
 
-  when:
-    params.cluster.contains('breakfast')
+  //when:
+  //  params.cluster.contains('breakfast')
 
   script:
     """

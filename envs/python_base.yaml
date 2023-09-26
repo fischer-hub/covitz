@@ -6,3 +6,6 @@ channels:
 dependencies:
   - biopython
   - gzip
+  - sklearn
+  - matplotlib
+  - pandas

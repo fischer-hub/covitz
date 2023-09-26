@@ -1,6 +1,6 @@
 process pangolin {
 
-  publishDir "$params.outdir/03-LINEAGE-ASSIGNMENT", pattern: 'clades.csv', mode: 'copy'
+  publishDir "$params.outdir/04-LINEAGE-ASSIGNMENT", pattern: 'clades.csv', mode: 'copy'
   label 'pangolin'
 
   input:

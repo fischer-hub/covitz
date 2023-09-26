@@ -1,3 +1,6 @@
 [submodule "lib/covsonar"]
 	path = lib/covsonar
 	url = https://github.com/rki-mf1/covsonar.git
+[submodule "lib/SARS2-RBD-escape-calc"]
+	path = lib/SARS2-RBD-escape-calc
+	url = https://github.com/jbloomlab/SARS2-RBD-escape-calc.git

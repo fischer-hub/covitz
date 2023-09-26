@@ -1,7 +1,6 @@
 import csv
 from Bio import AlignIO, Phylo
 from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
-import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
