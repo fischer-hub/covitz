@@ -6,6 +6,7 @@ include { count_mutations }          from './modules/count_mutations.nf'
 include { breakfast }                from './modules/breakfast.nf'
 include { cluster }                  from './modules/cluster.nf'
 include { msa }                      from './modules/mafft.nf'
+include { pangolin }                 from './modules/pangolin.nf'
 
 workflow {
 
@@ -15,6 +16,7 @@ workflow {
   count_ambigous(input_seqs)
   count_mutations(covsonar.out.mutations)
   breakfast(covsonar.out.mutations)
-  cluster(input_seqs)
   msa(input_seqs)
+  cluster(msa.out)
+  pangolin(input_seqs)
 }
