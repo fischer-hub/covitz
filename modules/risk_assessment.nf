@@ -8,12 +8,13 @@ process risk_assessment {
     path mutations
     path breakfast_clusters
     path identity_clusters
+    path lineage_aliases
 
   output:
     path 'risk.csv'
 
   script:
     """
-        risk_score.py $clades $mutations $breakfast_clusters $identity_clusters
+        risk_score.py $clades $mutations $breakfast_clusters $identity_clusters $params.lin_aliases $params.de_esc_vars
     """
 }
