@@ -15,6 +15,6 @@ process risk_assessment {
 
   script:
     """
-        risk_score.py $clades $mutations $breakfast_clusters $identity_clusters $params.lin_aliases $params.de_esc_vars
+        risk_score.py $clades $mutations $breakfast_clusters $identity_clusters $params.lin_aliases $params.de_esc_vars $params.th_yellow $params.th_red
     """
 }

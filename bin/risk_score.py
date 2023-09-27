@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pandas as pd
+import numpy as np
 import sys
 import re
 import json
@@ -12,6 +13,8 @@ breakfast_file  = sys.argv[4]
 identity_file   = sys.argv[5]
 lineage_aliases = sys.argv[6]
 de_esc_vars     = sys.argv[7]
+th_yellow       = int(sys.argv[8])
+th_red          = int(sys.argv[9])
 
 # load breakfast file
 breakfast_df = pd.read_csv(breakfast_file, sep = '\t')
@@ -103,6 +106,7 @@ mutations_df['de_escalated'] = [ lineage in de_esc_vars_lst for lineage in mutat
 # count ntd and rbd mutations
 num_ntd_mut = []
 num_rbd_mut = []
+
 for index, row in mutations_df.iterrows():
 
     num_ntd_mut.append(sum(1 for mut in row['aa_profile'].split(' ') if mut.startswith('S') and int(re.findall('[0-9]+', mut)[0]) >= 14 and int(re.findall('[0-9]+', mut)[0]) <= 305))
@@ -115,9 +119,51 @@ mutations_df['num_rbd_mut'] = num_rbd_mut
 # merge cluster information
 mutations_df = pd.concat([mutations_df.set_index('index'), breakfast_df.set_index('id')], axis=1, join='inner').reset_index()
 
+risk_scores = []
+risk_level = []
+risk_alert = ['green', 'yellow', 'red']
+risk_alerts = []
+
+for index, row in mutations_df.iterrows():
+
+    # we scale rbd muts up with their escape score: x * (1 + 1 - y) - this is maybe not a good scaling but has to be enough for now
+    immune_escape = row['relative_neutralization_retained'] * 2 if (row['relative_neutralization_retained'] != 'NA') else row['neutralization_retained']
+    risk_score = int(row['num_rbd_mut']) * (1 + 1 - int(immune_escape)) + int(row['num_ntd_mut'])
+    risk_scores.append(risk_score)
+
+    # assign risk level based on risk scoring
+    if risk_score < th_yellow:
+    
+        risk_level.append(1)
+    
+    elif risk_score < th_red:
+        
+        risk_level.append(2)
+    else:
+
+        risk_level.append(3)
+    
+    # lower risk level if lineage is de escalated lineage
+    if row['de_escalated']:
+        
+        if risk_level[index] > 1:
+            
+            risk_level[index] - 1
+
+    # scale risk with cluster info?
 
 
-print(mutations_df)
+    # assign risk alert based on level
+    risk_alerts.append(risk_alert[risk_level[index] - 1])
+
+
+
+    
+mutations_df['risk_score'] = risk_scores
+mutations_df['risk_alert'] = risk_alerts
+
+
+mutations_df.to_csv('risk_assessment.csv')
 
 
 
