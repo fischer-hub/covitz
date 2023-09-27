@@ -6,13 +6,14 @@ process risk_assessment {
   input:
     path clades
     path mutations
-    path clusters
+    path breakfast_clusters
+    path identity_clusters
 
   output:
     path 'risk.csv'
 
   script:
     """
-        risk_score.py $clades $mutations $clusters
+        risk_score.py $clades $mutations $breakfast_clusters $identity_clusters
     """
 }

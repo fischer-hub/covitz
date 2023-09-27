@@ -12,12 +12,12 @@ include { pangolin }                 from './modules/pangolin.nf'
 
 workflow {
 
-  covsonar(input_seqs)
+  pangolin(input_seqs)
+  covsonar(input_seqs, pangolin.out)
   count_ambigous(input_seqs)
   count_mutations(covsonar.out.mutations)
   breakfast(covsonar.out.mutations)
   msa(input_seqs)
   cluster(msa.out)
-  pangolin(input_seqs)
   
 }

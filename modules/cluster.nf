@@ -1,16 +1,16 @@
 process cluster {
 
-  publishDir "$params.outdir/03-CLUSTERING/cluster", pattern: 'pca_plot.png', mode: 'copy'
+  publishDir "$params.outdir/03-CLUSTERING/cluster", pattern: '*', mode: 'copy'
   label 'cluster'
 
   input:
-    path seqs
+    path msa
 
   output:
-    path 'pca_plot.png'
+    path '*'
 
   script:
     """
-    cluster.py $seqs
+    cluster.py $msa
     """
 }

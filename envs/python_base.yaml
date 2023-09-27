@@ -1,4 +1,4 @@
-name: count_ambigous
+name: python_base
 channels:
   - conda-forge
   - bioconda
@@ -6,6 +6,7 @@ channels:
 dependencies:
   - biopython
   - gzip
-  - sklearn
+  - scikit-learn
   - matplotlib
   - pandas
+  - seaborn

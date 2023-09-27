@@ -1,11 +1,17 @@
+#!/usr/bin/env python
 import csv
 from Bio import AlignIO, Phylo
 from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
+import sys
+import seaborn as sns
+import pandas as pd
 
 
-alignment = AlignIO.read("results/msa.fasta", "fasta")
+msa_file = sys.argv[1]
+
+alignment = AlignIO.read(msa_file, "fasta")
 
 calculator = DistanceCalculator("identity")  # percent
 dm = calculator.get_distance(alignment)
@@ -29,11 +35,15 @@ tree_png="phylogenetic_tree.png"
 Phylo.draw(tree, do_show=False)
 plt.title("Phylogenetic tree over all sequences")
 #plt.figure(figsize=(20, 6)) 
+
+plt.gcf().set_size_inches(10, 25)
+
 plt.savefig(tree_png)
+plt.close()
 
 
 pca = PCA()
-pca.fit(dm)
+pca.fit(1-dm)
 
 
 # PCA plot
@@ -43,3 +53,15 @@ plt.xlabel('PC 1')
 plt.ylabel('PC 2')
 plt.title('PCA-Plot')
 plt.savefig('pca_plot.png')  
+plt.close()
+
+
+ 
+# plot
+dm_df = pd.read_csv(csv_filename)
+sns.clustermap(dm_df, metric="correlation", method="single", cmap="icefire", standard_scale=1)
+plt.xlabel('Sequence names')
+plt.ylabel('Sequence names')
+plt.title('Clustered heatmap over sequence identity')
+plt.savefig('clustered_heatmap.png')  
+plt.close()
