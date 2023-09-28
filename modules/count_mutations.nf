@@ -17,11 +17,11 @@ process count_mutations {
 
       # count nuc mutations
       echo "nuc_mutations," >> nuc_mutations.csv
-      tail -n +2 $mutation | cut -d\$'\\t' -f 20 | while read LINE; do echo "\$(\$LINE | wc -w)," > nuc_mutations.csv ; done 
+      tail -n +2 $mutation | cut -d\$'\\t' -f 20 | while read LINE; do echo "\$(echo \$LINE | wc -w)," >> nuc_mutations.csv ; done 
 
       # count aa mutations
       echo "aa_mutations," >> aa_mutations.csv
-      tail -n +2 $mutation | cut -d\$'\\t' -f 21 | while read LINE; do echo "\$(\$LINE | wc -w)," > aa_mutations.csv ; done 
+      tail -n +2 $mutation | cut -d\$'\\t' -f 21 | while read LINE; do echo "\$(echo \$LINE | wc -w)," >> aa_mutations.csv ; done 
 
       # merge seq names and nuc mutations
       paste seq_names.csv nuc_mutations.csv aa_mutations.csv > mutation_count.csv

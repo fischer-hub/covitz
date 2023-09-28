@@ -62,7 +62,7 @@ dm_with_ids.to_csv(output_csv)
 
 
 # plot
-dm_df = pd.read_csv(csv_filename)
+dm_df = pd.read_csv(csv_filename, header=None)
 sns.clustermap(dm_df, metric="correlation", method="single", cmap="icefire", standard_scale=1)
 plt.xlabel('Sequence names')
 plt.ylabel('Sequence names')
