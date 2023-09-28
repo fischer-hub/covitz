@@ -9,9 +9,6 @@ process msa {
   output:
     path 'msa.fasta'
 
-  when:
-    params.cluster.contains('msa')
-
   script:
     """
         if [[ $seqs == *".gz"* ]]; then

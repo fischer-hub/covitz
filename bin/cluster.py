@@ -14,6 +14,7 @@ from sklearn.cluster import KMeans
 
 msa_file = sys.argv[1]
 mutations_data=sys.argv[2]
+#grouping_param=sys.argv[3]
 
 alignment = AlignIO.read(msa_file, "fasta")
 

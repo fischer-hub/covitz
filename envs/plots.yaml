@@ -1,8 +1,10 @@
-name: cluster
+name: plots
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - r-ggplot2
-  - bioconductor-biostrings
+  - r-pheatmap
+  - r-viridis
+  - r-dplyr
+  - r-tidyr

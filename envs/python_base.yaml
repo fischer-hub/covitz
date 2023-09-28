@@ -10,3 +10,7 @@ dependencies:
   - matplotlib
   - pandas
   - seaborn
+  - umap-learn
+  - numpy
+  - requests
+  - pyyaml
