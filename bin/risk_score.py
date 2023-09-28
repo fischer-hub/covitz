@@ -161,6 +161,7 @@ for index, row in mutations_df.iterrows():
 mutations_df['risk_score'] = risk_scores
 mutations_df['risk_alert'] = risk_alerts
 
+mutations_df = mutations_df.sort_values(by=['risk_score'], ascending=False)
 
 mutations_df.to_csv('risk_assessment.csv')
 

@@ -9,7 +9,8 @@ process cluster {
     path mutations
 
   output:
-    path '*.csv', emit: dist_matrix
+    path 'distance_matrix_identity.csv', emit: dist_matrix
+    path 'distance_matrix_with_id.csv', emit: dist_matrix_id
     path '*.png', emit: plots
 
   script:

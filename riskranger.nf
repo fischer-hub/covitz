@@ -11,6 +11,7 @@ include { plots }                    from './modules/cluster.nf'
 include { msa }                      from './modules/mafft.nf'
 include { pangolin }                 from './modules/pangolin.nf'
 include { risk_assessment }          from './modules/risk_assessment.nf'
+include { plots_alert }              from './modules/plots_alert.nf'
 
 log.info """\033[95m
      ____  _      __   ____                             
@@ -50,5 +51,6 @@ workflow {
   cluster(msa.out, covsonar.out.mutations)
   risk_assessment(pangolin.out, covsonar.out.mutations, breakfast.out, cluster.out.dist_matrix)
   plots(risk_assessment.out)
+  plots_alert(risk_assessment.out, cluster.out.dist_matrix)
   
 }

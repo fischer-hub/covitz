@@ -1,4 +1,4 @@
-# covvitz :microbe:
+# RiskRanger :microbe:
 Repository containing the project 3 of the sc2 analysis workshop.
 
 # getting started
@@ -11,7 +11,7 @@ git clone --recurse-submodules https://github.com/fischer-hub/covvitz.git
 To start the pipeline change into the project directory and run the follwing command in your terminal:
 ```
 cd covvitz
-nextflow covvitz.nf -profile conda,local
+nextflow riskranger.nf -profile conda,local
 ```
 
 This will run the pipeline with all default parameters on the provided test data that can be found in the `data/` directory of the project.

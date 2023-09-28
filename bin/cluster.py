@@ -11,10 +11,9 @@ import numpy as np
 import umap
 from sklearn.cluster import KMeans
 
-
 msa_file = sys.argv[1]
 mutations_data=sys.argv[2]
-#grouping_param=sys.argv[3]
+
 
 alignment = AlignIO.read(msa_file, "fasta")
 
@@ -34,17 +33,34 @@ tree = constructor.build_tree(alignment)
 tree_filename = "phylogenetic_tree.nwk"
 Phylo.write(tree, tree_filename, "newick")
 
+terminal_nodes = tree.get_terminals()
+
+terminal_tree = Phylo.BaseTree.Tree(root=tree.clade, rooted=True)
+terminal_tree.clade.clades = terminal_nodes
+
+
 #phylogenetic tree
 tree_png="phylogenetic_tree.png"
-Phylo.draw(tree, do_show=False)
-plt.title("Phylogenetic tree over all sequences")
+
+Phylo.draw(terminal_tree, do_show=False)
+plt.title("Dendogram on identity distance over all sequences")
 plt.gcf().set_size_inches(10, 25)
 
 plt.savefig(tree_png)
 plt.close()
 
+sequence_ids=[]
+with open(msa_file, "r") as f:
+    for line in f:
+        if line.startswith(">"):
+            seq_id = line.strip()[1:]
+            sequence_ids.append(seq_id)
 
- 
+dm_with_ids = pd.DataFrame(dm.matrix, index=sequence_ids, columns=sequence_ids)
+output_csv = "distance_matrix_with_id.csv"
+dm_with_ids.to_csv(output_csv)
+
+
 # plot
 dm_df = pd.read_csv(csv_filename)
 sns.clustermap(dm_df, metric="correlation", method="single", cmap="icefire", standard_scale=1)

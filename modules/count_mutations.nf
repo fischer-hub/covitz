@@ -1,6 +1,6 @@
 process count_mutations {
 
-  publishDir "$params.outdir/02-STATISTICS", pattern: 'mutations.csv', mode: 'copy'
+  publishDir "$params.outdir/02-STATISTICS", pattern: 'mutation_count.csv', mode: 'copy'
   label 'count_mutations'
 
   input:

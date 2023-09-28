@@ -16,7 +16,7 @@ process breakfast {
     """
       breakfast \
         --input-file $mutation_tsv \
-        --max-dist 2 \
+        --max-dist 5 \
         --min-cluster-size 2 \
         --outdir results/ \
         --jobs $task.cpus

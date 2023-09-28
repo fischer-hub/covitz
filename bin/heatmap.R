@@ -30,6 +30,7 @@ lineage_counts <- lineage_counts[order(lineage_counts[, grouping_param]), ]
 
 
 merged_counts <- cbind(mutation_counts,lineage_counts$n)
+rownames(merged_counts) <- lineage_counts$risk_alert
 colnames(merged_counts)[which(colnames(merged_counts) == "lineage_counts$n")] <- "lineage_count"
 
 
@@ -43,20 +44,19 @@ merged_counts_filtered_percent <- merged_counts_percent[, apply(merged_counts_pe
 merged_counts_filtered_percent <- merged_counts_filtered_percent %>%
   select(-"lineage_count")
 
-rownames(merged_counts_filtered_percent) <- merged_counts_filtered_percent$grouping_param
-
 
 png(paste('mutation_profile_heatmap_by_', grouping_param, '.png'), width = 62, height = 9, units = 'cm', res = 300)
 
+
 #heatmap
-pheatmap(
+p <-pheatmap(
   (merged_counts_filtered_percent[-1]),  
   cluster_rows = FALSE, 
   cluster_cols = FALSE,   
   color = viridis(100), 
   cellwidth = 10,
   cellheight = 20,
-  display_numbers = FALSE, 
+  display_numbers = FALSE
 )
 
 dev.off()
