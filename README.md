@@ -1,5 +1,5 @@
-<img align="left" width="100" height="100" src='data/riskranger_logo.jpeg' alt="application project app icon" style="border-radius:20% margin: 10">
-# RiskRanger :microbe:
+# RiskRanger :microbe: <img align="left" width="100" height="100" src='data/riskranger_logo.jpeg' alt="application project app icon" style="border-radius:20% margin: 10">
+
 
 
 Repository containing the project 3 of the sc2 analysis workshop.
