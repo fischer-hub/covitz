@@ -1,4 +1,5 @@
-<p align="center">  # RiskRanger :microbe:    <img src="data/riskranger_logo.jpeg" width="150"></p>
+<img align="left" width="100" height="100" src='data/riskranger_logo.jpeg' alt="application project app icon" style="border-radius:20% margin: 10">
+# RiskRanger :microbe:
 
 
 Repository containing the project 3 of the sc2 analysis workshop.
@@ -39,5 +40,5 @@ th_af           Minimal allel frequency threshold to drop sites in mutation site
 ```
 
 <p align="center">
-    <img src="data/riskranger_logo2.png" width="300">
+    <img src="data/riskranger_logo2.png" width="300" style="border-radius:20%">
 </p>
